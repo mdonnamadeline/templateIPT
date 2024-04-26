@@ -1,5 +1,4 @@
 import React from "react";
-import { LocalLibrarySharp } from "@mui/icons-material";
 
 function NavBar() {
     return (
@@ -7,7 +6,6 @@ function NavBar() {
             <div className="navbar-items">
 
                 <div className="navbar-items-tile">
-                    <LocalLibrarySharp />
                     <p>Welcome to Journaling 101!</p>
                 </div>
 

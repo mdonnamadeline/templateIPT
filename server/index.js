@@ -4,13 +4,13 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const mongoose = require("mongoose");
-const DataModel = require("./models/datamodel.model");
+const DataModel = require("./models/journal.model");
 const path = require('path');
 app.use(cors());
 app.use(bodyParser.json());
 
 const port = 1337;
-const dbName = "ipt";
+const dbName = "journal-database";
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

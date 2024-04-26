@@ -23,7 +23,7 @@ function Homepage() {
     const initialData = {
         date: "",
         title: "",
-        actions: "",
+        content: "",
     };
 
     const [currentData, setCurrentData] = useState(initialData);
@@ -106,7 +106,6 @@ function Homepage() {
         <div className="container">
             <NavBar />
             <div className="content">
-                <h1>Manage</h1>
                 <Button
                     className="manage-button"
                     variant="contained"
@@ -119,23 +118,23 @@ function Homepage() {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Date</TableCell>
-                                <TableCell>Title</TableCell>
-                                <TableCell>Actions</TableCell>
+                                <TableCell align="center">Date</TableCell>
+                                <TableCell align="center">Title</TableCell>
+                                <TableCell align="center">Actions</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {dataList.map((item) => (
                                 <TableRow key={item.date}>
-                                    <TableCell>{item.date}</TableCell>
-                                    <TableCell>{item.title}</TableCell>
+                                    <TableCell align="center">{item.date}</TableCell>
+                                    <TableCell align="center">{item.title}</TableCell>
 
-                                    <TableCell> 
+                                    <TableCell align="center" > 
                                        
-                                            <Edit onClick={() =>
+                                            <Edit className="icon-edit" onClick={() =>
                                                 openModal(item, true)
                                             }/>
-                                            <Delete />
+                                            <Delete className="icon-delete" />
                                             
                                     </TableCell>
                                 </TableRow>
@@ -155,15 +154,17 @@ function Homepage() {
                                         : handleAddEntry
                                 }
                             >
-                                <p>Add New Entry</p>
+                                <p>{isEditMode ? "EDIT" : "ADD NEW ENTRY"}</p>
 
                                 <TextField
                                     id="date"
                                     required
                                     label="Date"
                                     variant="outlined"
+                                    type="date"
                                     value={currentData.date}
                                     onChange={handleChange}
+                                    InputLabelProps={{shrink: true,}}
                                 />
 
                                 <TextField
@@ -182,9 +183,11 @@ function Homepage() {
                                     variant="outlined"
                                     value={currentData.content}
                                     onChange={handleChange}
+                                    multiline
+                                    rows="5"
                                 />
 
-                                <Button variant="contained" type="submit">
+                                <Button className="buttonmodal" variant="contained" type="submit">
                                     {isEditMode ? "EDIT" : "ADD"}
                                 </Button>
                             </form>

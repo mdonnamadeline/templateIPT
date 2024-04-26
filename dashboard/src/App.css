@@ -10,7 +10,7 @@ body {
 }
 
 .content {
-    padding: 1em;
+    padding: 5em;
     font-family: "Poppins", sans-serif;
     display: flex;
     flex-direction: column;
@@ -54,6 +54,7 @@ body {
     font-size: 18px;
     position: sticky;
     top: 0;
+    padding-left: 20px;
 }
 
 .navbar-items {
@@ -120,3 +121,11 @@ form {
 
 }
 
+.icon-edit, .icon-delete {
+    color: rgb(59, 64, 167);
+    margin-right: 20px;
+}
+
+.buttonmodal{
+    width: 20%;
+}
