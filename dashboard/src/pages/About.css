@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Unica+One&display=swap");
+
+.aboutus-items {
+    display: flex; 
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+}
+
+.aboutus-items img {
+    flex: 1; 
+    height: auto;
+    width: 600px;
+}
+
+.aboutus-items h6,
+.aboutus-items p {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    text-align: center;
+    z-index: 1; 
+}
+
+.aboutus-items h6 {
+    top: 10%; 
+    font-size: 72px;
+    font-family: 'Unica One', sans-serif;
+}
+
+.aboutus-items p {
+    top: 60%;
+    font-size: 25px;
+    font-family: 'Unica One', sans-serif;
+    font:100%;
+}
+/*  */
+.aboutus-items-container {
+    height: 100vh; 
+    width: 100%; 
+}
+.grid-item{
+    color: white;
+    font-family: 'Unica One', sans-serif;
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background-color: #313539; /* or any color you prefer */
+}
+
+.contact-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    width: 100%;
+}
+
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
