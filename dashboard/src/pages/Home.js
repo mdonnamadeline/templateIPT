@@ -8,6 +8,14 @@ import Drinks from "../Images/home-drinks-min.jpg";
 import Nachos from "../Images/Nachos-min.jpg";
 import Feature from "../Images/home-featured-min-1.jpg";
 import Release from "../Images/release.jpg";
+import Horizontal from "../Images/horizontal-logo-min.png";
+import Email from "../Images/email.png";
+import Message from "../Images/message.png";
+import Location from "../Images/location.png";
+import Facebook from "../Images/fb.png";
+import Twitter from "../Images/x.png";
+import Pinterest from "../Images/p.png";
+import Instagram from "../Images/ig.png";
 
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
@@ -20,7 +28,7 @@ import {
 } from "@mui/material";
 
 function Home() {
-    
+  
     const cardData = [
         {
             image: Nachos,
@@ -50,8 +58,8 @@ function Home() {
                 </p>{" "}
                 <br />
                 <div className="home-item-images">
-                    <img src={Herseys} alt="Insign" />
-                    <img src={Drinks} alt="Banner" />
+                    <img src={Herseys} alt="Herseys" />
+                    <img src={Drinks} alt="Drinks" />
                     <p>
                         We take pride in being the country’s first black soft
                         serve ice cream, tea and coffee lounge. The concept is
@@ -83,7 +91,11 @@ function Home() {
                 <div className="home-card">
                     <div className="home-card-items">
                         {cardData.map((card, index) => (
-                            <Card key={index} sx={{ maxWidth: 345 }} className="card">
+                            <Card
+                                key={index}
+                                sx={{ maxWidth: 345 }}
+                                className="card"
+                            >
                                 <CardActionArea>
                                     <CardContent>
                                         <Typography
@@ -113,6 +125,63 @@ function Home() {
                         ))}
                     </div>
                 </div>
+            </div>
+
+            <div className="contact">
+                <img src={Horizontal} alt="Horizontal" />
+
+                <div className="contact-items">
+                    <div className="contact-item">
+                        <img src={Email} alt="Email" />
+                        <p>EMAIL US</p>
+                        <p>ADMIN@BLACKSCOOPCAFE.COM</p>
+                    </div>
+                    <div className="contact-item">
+                        <img src={Message} alt="Message" />
+                        <p>CALL US</p>
+                        <p>+63917 522 2256</p>
+                    </div>
+                    <div className="contact-item">
+                        <img src={Location} alt="Location" />
+                        <p>MAIN BRANCH</p>
+                        <p>101 MAGINHAWA ST. QUESZON CITY</p>
+                    </div>
+                </div>
+            </div>
+
+            <div className="social">
+                <Button
+                    component={Link}
+                    to="https://www.facebook.com/blackscoopcafe/"
+                    className="circle-button"
+                >
+                    <img src={Facebook} alt="Facebook" className="icon" />
+                    <i className="fab fa-facebook-f"></i>
+                </Button>
+                <Button
+                    component={Link}
+                    to="https://x.com/blackscoopcafe"
+                    className="circle-button"
+                >
+                    <img src={Twitter} alt="Twitter" className="icon" />
+                    <i className="fab fa-twitter"></i>
+                </Button>
+                <Button
+                    component={Link}
+                    to="https://www.pinterest.ph/blackscoopcafe/"
+                    className="circle-button"
+                >
+                    <img src={Pinterest} alt="Pinterest" className="icon" />
+                    <i className="fab fa-pinterest-p"></i>
+                </Button>
+                <Button
+                    component={Link}
+                    to="https://www.instagram.com/blackscoopcafeph/"
+                    className="circle-button"
+                >
+                    <img src={Instagram} alt="Instagram" className="icon" />
+                    <i className="fab fa-instagram"></i>
+                </Button>
             </div>
         </div>
     );

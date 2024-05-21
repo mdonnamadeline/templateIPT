@@ -9,7 +9,6 @@ body {
     align-items: stretch;
     justify-content: center;
     position: relative;
-    /* background-color: rgb(170, 169, 169);   */
 }
 
 .home-items img:first-child {
@@ -77,6 +76,7 @@ body {
 
 .card{
     background-color: grey;
+    font-family: "Unica One", Arial, Helvetica, sans-serif;
 }
 
 .home-card {
@@ -101,9 +101,83 @@ body {
     box-sizing: border-box; 
     margin: 10px; 
     overflow: auto; 
+    font-family: "Unica One", Arial, Helvetica, sans-serif ;
+
 }
 
 .card-item img {
     width: 100%; 
     height: auto; 
 }
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.contact-items {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    gap: 60px;
+}
+
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+}
+
+.contact-items img {
+    width: 50px;
+    height: 50px;
+
+}
+.contact-items p {
+    color: white;
+    font-family: "Unica One", Arial, Helvetica, sans-serif;
+}
+
+
+ .circle-button {
+    margin-top: 20px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(59,64,69);
+    margin-bottom: 20px;
+
+}
+
+.circle-button:hover {
+    background-color: darkgrey;
+}
+ 
+.social {
+    margin-top: 20px;
+    display: flex;
+    justify-content: right;
+    align-items: stretch;
+    gap: 10px;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+}
+
+
