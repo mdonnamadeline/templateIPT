@@ -6,6 +6,17 @@ import Image1 from "../Images/brazil.jpg";
 import Image2 from "../Images/ovaltine.jpg";
 import Image3 from "../Images/places.jpg";
 import Image4 from "../Images/Snapseed.jpg";
+import Horizontal from "../Images/horizontal-logo-min.png";
+import Email from "../Images/email.png";
+import Message from "../Images/message.png";
+import Location from "../Images/location.png";
+import Facebook from "../Images/fb.png";
+import Twitter from "../Images/x.png";
+import Pinterest from "../Images/p.png";
+import Instagram from "../Images/ig.png";
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
+
 
 function OurStory() {
     const timelineItems = [
@@ -52,13 +63,69 @@ function OurStory() {
                 {timelineItems.map((item, index) => (
                     <div key={index} className="timeline-item">
                         <h2>{item.date}</h2>
-                        <img src={item.image} alt="Timeline"  />
+                        <img src={item.image} alt="Timeline" />
                         <p>{item.description}</p>
                     </div>
                 ))}
             </div>
-                
 
+            <div>
+                <div className="contact">
+                    <img src={Horizontal} alt="Horizontal" />
+
+                    <div className="contact-items">
+                        <div className="contact-item">
+                            <img src={Email} alt="Email" />
+                            <p>EMAIL US</p>
+                            <p>ADMIN@BLACKSCOOPCAFE.COM</p>
+                        </div>
+                        <div className="contact-item">
+                            <img src={Message} alt="Message" />
+                            <p>CALL US</p>
+                            <p>+63917 522 2256</p>
+                        </div>
+                        <div className="contact-item">
+                            <img src={Location} alt="Location" />
+                            <p>MAIN BRANCH</p>
+                            <p>101 MAGINHAWA ST. QUESZON CITY</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="social">
+                    <Button
+                        component={Link}
+                        to="https://www.facebook.com/blackscoopcafe/"
+                        className="circle-button"
+                    >
+                        <img src={Facebook} alt="Facebook" className="icon" />
+                        <i className="fab fa-facebook-f"></i>
+                    </Button>
+                    <Button
+                        component={Link}
+                        to="https://x.com/blackscoopcafe"
+                        className="circle-button"
+                    >
+                        <img src={Twitter} alt="Twitter" className="icon" />
+                        <i className="fab fa-twitter"></i>
+                    </Button>
+                    <Button
+                        component={Link}
+                        to="https://www.pinterest.ph/blackscoopcafe/"
+                        className="circle-button"
+                    >
+                        <img src={Pinterest} alt="Pinterest" className="icon" />
+                        <i className="fab fa-pinterest-p"></i>
+                    </Button>
+                    <Button
+                        component={Link}
+                        to="https://www.instagram.com/blackscoopcafeph/"
+                        className="circle-button"
+                    >
+                        <img src={Instagram} alt="Instagram" className="icon" />
+                        <i className="fab fa-instagram"></i>
+                    </Button>
+                </div>
+            </div>
         </div>
     );
 }
