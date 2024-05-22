@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "./NavBar";
-import "./About.css";
+import "./About.css"
 import Founded from "../Images/Black-Scoop-Cafe-founded-min.jpg";
 import Sets from "../Images/what-sets-black-scoop-cafe-apart-min.jpg";
 import Grid from "@mui/material/Grid";

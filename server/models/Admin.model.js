@@ -9,7 +9,7 @@ const AdminModel = new Schema(
     firstname: requiredString,
     lastname: requiredString,
     middlename: requiredString,
-    email: { requiredString},
+    email: requiredString,
     password: requiredString,
   },
   { collection: collectionName } 

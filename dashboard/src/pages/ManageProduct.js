@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
     TableBody,
@@ -42,13 +42,13 @@ function ManageProduct() {
     const handleChange = (e) => {
         setCurrentData({
             ...currentData,
-            [e.target.name || e.target.id]: e.target.value,
+            [e.target.name]: e.target.value,
         });
     };
 
     useEffect(() => {
         axios
-            .get(`http://localhost:1337/ViewEntries`)
+            .get(`http://localhost:1337/ViewAdmins`)
             .then((response) => {
                 setDataList(response.data);
             })
@@ -62,7 +62,7 @@ function ManageProduct() {
 
         try {
             const response = await axios.post(
-                "http://localhost:1337/AddEntry",
+                "http://localhost:1337/AddAdmin",
                 currentData
             );
 
@@ -75,7 +75,7 @@ function ManageProduct() {
             alert(result.message);
         } catch (error) {
             console.error("Error adding data:", error);
-            alert("An error occured. Please try again.");
+            alert("An error occurred. Please try again.");
         }
     };
 
@@ -99,7 +99,7 @@ function ManageProduct() {
             }
         } catch (error) {
             console.error("Error updating data:", error);
-            alert("An error occured. Please try again.");
+            alert("An error occurred. Please try again.");
         }
     };
 
@@ -118,7 +118,7 @@ function ManageProduct() {
                 <TableContainer className="table-container">
                     <Table>
                         <TableHead>
-                            <TableRow >
+                            <TableRow>
                                 <TableCell align="center">Date</TableCell>
                                 <TableCell align="center">Title</TableCell>
                                 <TableCell align="center">Actions</TableCell>
@@ -130,13 +130,14 @@ function ManageProduct() {
                                     <TableCell align="center">{item.date}</TableCell>
                                     <TableCell align="center">{item.title}</TableCell>
 
-                                    <TableCell align="center" > 
-                                       
-                                            <Edit className="icon-edit" onClick={() =>
+                                    <TableCell align="center">
+                                        <Edit
+                                            className="icon-edit"
+                                            onClick={() =>
                                                 openModal(item, true)
-                                            }/>
-                                            <Delete className="icon-delete" />
-                                            
+                                            }
+                                        />
+                                        <Delete className="icon-delete" />
                                     </TableCell>
                                 </TableRow>
                             ))}
@@ -163,9 +164,10 @@ function ManageProduct() {
                                     label="Date"
                                     variant="outlined"
                                     type="date"
+                                    name="date"
                                     value={currentData.date}
                                     onChange={handleChange}
-                                    InputLabelProps={{shrink: true,}}
+                                    InputLabelProps={{ shrink: true }}
                                 />
 
                                 <TextField
@@ -173,22 +175,28 @@ function ManageProduct() {
                                     required
                                     label="Title"
                                     variant="outlined"
+                                    name="title"
                                     value={currentData.title}
                                     onChange={handleChange}
                                 />
 
-                                <TextField 
+                                <TextField
                                     id="content"
                                     required
                                     label="Content"
                                     variant="outlined"
+                                    name="content"
                                     value={currentData.content}
                                     onChange={handleChange}
                                     multiline
                                     rows="5"
                                 />
 
-                                <Button className="buttonmodal" variant="contained" type="submit">
+                                <Button
+                                    className="buttonmodal"
+                                    variant="contained"
+                                    type="submit"
+                                >
                                     {isEditMode ? "EDIT" : "ADD"}
                                 </Button>
                             </form>

@@ -68,7 +68,7 @@ function ManageUser() {
             navigate("/");
         }
         axios
-            .get(`http://localhost:1337/ViewAdmins`)
+            .get(`http://localhost:1337/Viewadmins`)
             .then((response) => {
                 setUsers(response.data);
             })
@@ -92,7 +92,7 @@ function ManageUser() {
 
         try {
             const response = await axios.post(
-                "http://localhost:1337/EditAdmin",
+                "http://localhost:1337/Editadmin",
                 currentUser
             );
 
@@ -116,7 +116,7 @@ function ManageUser() {
 
         try {
             const response = await axios.post(
-                "http://localhost:1337/AddAdmin",
+                "http://localhost:1337/Addadmin",
                 user
             );
 

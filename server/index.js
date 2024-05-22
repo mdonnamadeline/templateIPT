@@ -137,7 +137,7 @@ app.post("/signup", async (req, res) => {
  
 //ADMIN CRUD
 // add admin
-app.post("/AddAdmin", async (req, res) => {
+app.post("/Addadmin", async (req, res) => {
     const incomingData = req.body;
 
     try {
@@ -151,7 +151,7 @@ app.post("/AddAdmin", async (req, res) => {
 });
 
 //view or read
-app.get("/ViewAdmins", async (req, res) => {
+app.get("/Viewadmins", async (req, res) => {
     try {
         const gotAdminList = await AdminModel.find();
         res.json(gotAdminList);
@@ -162,11 +162,11 @@ app.get("/ViewAdmins", async (req, res) => {
 });
 
 // update admin
-app.post("/EditAdmin", async (req, res) => {
+app.put("/Editadmin/:id", async (req, res) => {
     const incomingData = req.body;
 
     try {
-        const adminObject = await AdminModel.findOne({ username: incomingData.username });
+        const adminObject = await AdminModel.findById(req.params.id);
         if (!adminObject) {
             res.json({ success: false, message: "Admin not found" });
         } else {
@@ -181,15 +181,13 @@ app.post("/EditAdmin", async (req, res) => {
 });
 
 // delete admin
-app.post("/DeleteAdmin", async (req, res) => {
-    const incomingData = req.body;
-
+app.delete("/Deleteadmin/:id", async (req, res) => {
     try {
-        const adminObject = await AdminModel.findOne({ email: incomingData.email });
+        const adminObject = await AdminModel.findById(req.params.id);
         if (!adminObject) {
             res.json({ success: false, message: "Admin not found" });
         } else {
-            await AdminModel.deleteOne({ email: incomingData.email });
+            await AdminModel.deleteOne({ _id: req.params.id });
             res.json({ success: true, message: "Admin deleted successfully!" });
         }
     } catch (error) {
