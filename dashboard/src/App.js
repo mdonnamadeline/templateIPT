@@ -5,16 +5,20 @@ import AboutUs from "./pages/AboutUs";
 import Menu from "./pages/Menu";
 import OurStory from "./pages/OurStory";
 import ContactUs from "./pages/ContactUs";
-import ManageProduct from "./pages/ManageProduct";
 import Login from "./pages/Login";
+import Admin from "./pages/Admin";
+import ManageUser from "./pages/ManageUser";
+
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/manageproduct" element={<ManageProduct />} />
-                <Route path="/home" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                {/* <Route path="/manageproduct" element={<ManageProduct />} /> */}
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/manageuser" element={<ManageUser />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/Aboutus" element={<AboutUs />} />
                 <Route path="/Menu" element={<Menu />} />
                 <Route path="/ourstory" element={<OurStory />} />

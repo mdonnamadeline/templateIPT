@@ -26,11 +26,9 @@ function NavBar() {
                 >
                     <Link to="/home">HOME</Link>
                     <Link to="/aboutus">ABOUT US</Link>
-                    <Link  to="/manageproduct">MANAGE PRODUCT</Link>
                     <Link to="/menu">MENU</Link>
                     <Link to="/ourstory">OUR STORY</Link>
                     <Link to="/contactus">CONTACT US</Link>
-                    <Link to="/">LOGOUT</Link> {/* Add this line */}
                 </div>
             </div>
         </div>

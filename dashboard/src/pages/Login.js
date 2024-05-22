@@ -24,32 +24,34 @@ function Login() {
         });
     };
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post(
-                "http://localhost:1337/login",
-                user
-            );
-            const result = response.data;
-            if (result.success) {
+   const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+        const response = await axios.post(
+            "http://localhost:1337/adminLogin",
+            user
+        );
+        const result = response.data;
+        if (result.success) {
+            if (result.role === "admin") {
                 localStorage.setItem("user", user.email);
-                if (result.role === "customer") {
-                    navigate("/customerinformation");
-                } else {
-                    navigate("/dashboard");
-                }
+                navigate("/admin"); 
+            } else {
+                alert("Only admins can log in.");
             }
+        } else {
             alert(result.message);
-        } catch (error) {
-            console.error("Error logging in:", error);
-            alert("An error occured. Please try again.");
         }
-    };
-
+    } catch (error) {
+        console.error("Error logging in:", error);
+        alert("An error occured. Please try again.");
+    }
+};
     return (
-        <div className="loginContainer"  style={{ backgroundImage: `url(${Min})` }}>
-
+        <div
+            className="loginContainer"
+            style={{ backgroundImage: `url(${Min})` }}
+        >
             <img
                 src={Insign}
                 alt="Insign"

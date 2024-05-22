@@ -5,12 +5,14 @@ const bodyParser = require("body-parser");
 const fs = require("fs");
 const mongoose = require("mongoose");
 const DataModel = require("./models/journal.model");
+const AdminModel = require("./models/Admin.model");
+const MenuModel = require("./models/Menu.model");
 const path = require('path');
 app.use(cors());
 app.use(bodyParser.json());
 
 const port = 1337;
-const dbName = "journal-database";
+const dbName = "website-data";
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
@@ -124,3 +126,97 @@ app.post("/signup", async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+
+//MARK# NEW
+ 
+//ADMIN CRUD
+// add admin
+app.post("/AddAdmin", async (req, res) => {
+    const incomingData = req.body;
+
+    try {
+        const adminObject = new AdminModel(incomingData);
+        await adminObject.save();
+        res.json({ success: true, message: "Admin added successfully!" });
+    } catch (error) {
+        console.error("Error adding admin:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+//view or read
+app.get("/ViewAdmins", async (req, res) => {
+    try {
+        const gotAdminList = await AdminModel.find();
+        res.json(gotAdminList);
+    } catch (error) {
+        console.error("Error getting admins:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+// update admin
+app.post("/EditAdmin", async (req, res) => {
+    const incomingData = req.body;
+
+    try {
+        const adminObject = await AdminModel.findOne({ username: incomingData.username });
+        if (!adminObject) {
+            res.json({ success: false, message: "Admin not found" });
+        } else {
+            Object.assign(adminObject, incomingData);
+            await adminObject.save();
+            res.json({ success: true, message: "Admin updated successfully!" });
+        }
+    } catch (error) {
+        console.error("Error updating admin:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+// delete admin
+app.post("/DeleteAdmin", async (req, res) => {
+    const incomingData = req.body;
+
+    try {
+        const adminObject = await AdminModel.findOne({ email: incomingData.email });
+        if (!adminObject) {
+            res.json({ success: false, message: "Admin not found" });
+        } else {
+            await AdminModel.deleteOne({ email: incomingData.email });
+            res.json({ success: true, message: "Admin deleted successfully!" });
+        }
+    } catch (error) {
+        console.error("Error deleting admin:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+//signin
+app.post('/adminLogin', async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        const adminObject = await AdminModel.findOne({ username });
+
+        if (!adminObject) {
+            return res.status(400).json({ error: 'Invalid username or password' });
+        }
+
+        if (adminObject.password !== password) {
+            return res.status(400).json({ error: 'Invalid username or password' });
+        }
+
+        // Admin is authenticated
+        res.json({ success: true, message: 'Logged in successfully!', role: 'admin' });
+    } catch (error) {
+        console.error('Error logging in:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+//MENU CRUD 
+
+
