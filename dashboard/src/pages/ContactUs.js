@@ -10,7 +10,7 @@ import Twitter from "../Images/x.png";
 import Pinterest from "../Images/p.png";
 import Instagram from "../Images/ig.png";
 import Barista from "../Images/barista.jpg";
-import { TextField, Button, Paper } from "@mui/material";
+import { TextField, Button, Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 function ContactUs() {
@@ -18,62 +18,79 @@ function ContactUs() {
         <div className="contactus">
             <NavBar />
             <div className="contactus-container">
-            <div className="contactus-items">
-                <Paper
-                    style={{
-                        padding: "50px",
-                        marginTop: "20px",
-                        background: "#24292d",
-                    }}
-                >
-                    <TextField
-                        variant="outlined"
-                        label="First Name"
-                        fullWidth
-                        margin="normal"
-                    />
-                    <TextField
-                        variant="outlined"
-                        label="Last Name"
-                        fullWidth
-                        margin="normal"
-                    />
-                    <TextField
-                        variant="outlined"
-                        label="Phone Number"
-                        fullWidth
-                        margin="normal"
-                    />
-                    <TextField
-                        variant="outlined"
-                        label="Email"
-                        fullWidth
-                        margin="normal"
-                    />
-                    <TextField
-                        variant="outlined"
-                        label="Send Message"
-                        multiline
-                        rows={5}
-                        fullWidth
-                        margin="normal"
-                    />
-                    <Button
-                        variant="outlined"
-                        color="primary"
+                <div className="contactus-items">
+                    <Paper
                         style={{
-                            color: "white",
-                            borderColor: "white",
+                            padding: "50px",
                             marginTop: "20px",
+                            background: "#24292d",
                         }}
                     >
-                        SEND MESSAGE
-                    </Button>
-                </Paper>
-            </div>
-            <div className="barista">
-                <img src={Barista} alt="Barista" className="barista-image" />
-            </div>
+                        <Typography
+                            variant="h5"
+                            style={{ color: "white", marginBottom: "20px", fontSize: 40,  fontFamily: "Unica One" }}
+                        >
+                            GET IN TOUCH!
+                        </Typography>
+                        <Typography
+                            variant="subtitle1"
+                            style={{ color: "#ae895d", marginBottom: "20px", fontFamily: "Unica One"}}
+                        >
+                            HAVE QUESTIONS? WE ARE HAPPY TO ANSWER!
+                        </Typography>
+
+                        <TextField
+                            variant="outlined"
+                            label="First Name"
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            variant="outlined"
+                            label="Last Name"
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            variant="outlined"
+                            label="Phone Number"
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            variant="outlined"
+                            label="Email"
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            variant="outlined"
+                            label="Send Message"
+                            multiline
+                            rows={5}
+                            fullWidth
+                            margin="normal"
+                        />
+                        <Button
+                            variant="outlined"
+                            color="primary"
+                            style={{
+                                color: "white",
+                                borderColor: "white",
+                                marginTop: "20px",
+                            }}
+                        >
+                            SEND MESSAGE
+                        </Button>
+                    </Paper>
+                </div>
+                <div className="barista">
+                    <img
+                        src={Barista}
+                        alt="Barista"
+                        className="barista-image"
+                    />
+                </div>
             </div>
             <br />
             <br />

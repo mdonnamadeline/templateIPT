@@ -26,6 +26,8 @@
     font-weight: bold;
     align-items: center;
     margin-left: 5px;
+    font-family: "Unica One", Arial, Helvetica, sans-serif;
+
 }
 
 .navbar-items-tile {
@@ -33,6 +35,8 @@
     flex-direction: row;
     align-items: center;
     gap: 5px;
+    font-family: "Unica One", Arial, Helvetica, sans-serif;
+
 }
 
 .navbar-items-tile img {
@@ -51,7 +55,7 @@ a {
 }
 
 .navbar-items-section a {
-    color: white; /* change this to your preferred color */
+    color: white; 
     text-decoration: none;
 }
 

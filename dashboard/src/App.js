@@ -7,12 +7,14 @@ import Menu from "./pages/Menu";
 import OurStory from "./pages/OurStory";
 import ContactUs from "./pages/ContactUs";
 import Social from "./pages/Social";
+import ManageProduct from "./pages/ManageProduct";
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
                 {/* <Route path="/" element={<Homepage />} /> */}
+                <Route path="/manageproduct" element={<ManageProduct />} />
                 <Route path="/" element={<Home />} />
                 <Route path="/Aboutus" element={<AboutUs />} />
                 <Route path="/Menu" element={<Menu />} />

@@ -13,9 +13,10 @@ import {
     TextField,
 } from "@mui/material";
 import NavBar from "./NavBar";
+import "./ManageProduct.css";
 import { Delete, Edit } from "@mui/icons-material";
 
-function Homepage() {
+function ManageProduct() {
     const [dataList, setDataList] = useState([]);
     const [refreshDataList, setRefreshDataList] = useState(false);
     const [modalState, setModalState] = useState(false);
@@ -114,7 +115,7 @@ function Homepage() {
                     ADD ENTRY
                 </Button>
 
-                <TableContainer>
+                <TableContainer className="table-container">
                     <Table>
                         <TableHead>
                             <TableRow>
@@ -199,4 +200,4 @@ function Homepage() {
     );
 }
 
-export default Homepage;
+export default ManageProduct;
