@@ -24,29 +24,28 @@
     font-weight: lighter;
 }
 
-
 .aboutus-items h6 {
     top: 10%;
-    font-size: 5vw; 
+    font-size: 5vw;
     font-family: "Unica One", sans-serif;
     font-weight: lighter;
 }
 
 .aboutus-items p {
     top: 60%;
-    font-size: 2vw; 
+    font-size: 2vw;
     font-family: "Unica One", sans-serif;
     font: 100%;
 }
 
 @media (max-width: 600px) {
     .aboutus-items h6 {
-        font-size: 8vw; 
+        font-size: 8vw;
     }
 
     .aboutus-items p {
-        font-size: 4vw; 
-}
+        font-size: 4vw;
+    }
 }
 
 .aboutus-items-container {
@@ -76,7 +75,7 @@
     width: 100%;
     position: sticky;
     top: 0;
-    background-color: #313539; 
+    background-color: #313539;
 }
 
 .contact-items {

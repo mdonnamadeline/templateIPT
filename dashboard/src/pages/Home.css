@@ -1,8 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Unica+One&display=swap");
 
 
-body {
+body, html {
+    margin: 0;
+    padding: 0;
     background-color: #313539;
+    font-family: Arial, sans-serif; /* You can add your preferred font-family here */
+    /* Add other global styles here if needed */
 }
 
 .home-items {
@@ -114,9 +118,12 @@ body {
 .contact {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    justify-content: center;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background-color: #313539; 
 }
 
 .contact-items {

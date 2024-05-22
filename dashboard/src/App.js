@@ -18,7 +18,7 @@ function App() {
                 {/* <Route path="/manageproduct" element={<ManageProduct />} /> */}
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/manageuser" element={<ManageUser />} />
-                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/Aboutus" element={<AboutUs />} />
                 <Route path="/Menu" element={<Menu />} />
                 <Route path="/ourstory" element={<OurStory />} />

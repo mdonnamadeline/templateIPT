@@ -1,18 +1,18 @@
-const mongoose = require('mongoose');
-const { Schema, model: _model } = mongoose;
+// const mongoose = require('mongoose');
+// const { Schema, model: _model } = mongoose;
 
-const requiredString = { type: String, required: true };
-const collectionName = 'journal-data';
+// const requiredString = { type: String, required: true };
+// const collectionName = 'journal-data';
 
-const DataModel = new Schema(
-  {
-    date: requiredString,
-    title: { type: String, required: true, unique: true },
-    content: requiredString,
-  },
-  { collection: collectionName } 
-);
+// const DataModel = new Schema(
+//   {
+//     date: requiredString,
+//     title: { type: String, required: true, unique: true },
+//     content: requiredString,
+//   },
+//   { collection: collectionName } 
+// );
 
-const model = _model(collectionName, DataModel);
+// const model = _model(collectionName, DataModel);
 
-module.exports = model;
+// module.exports = model;
