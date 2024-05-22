@@ -1,18 +1,13 @@
 const mongoose = require('mongoose');
-const { Schema, model: _model } = mongoose;
+const { Schema } = mongoose;
 
-const requiredString = { type: String, required: true };
-const collectionName = 'menu-data';
+const menuSchema = new Schema({
+  name: { type: String, required: true },
+  price: { type: Number, required: true },
+  description: { type: String, required: true },
+  image: { type: String, required: true }
+}, { collection: 'menu-data' });
 
-const MenuModel = new Schema(
-  {
-    name: requiredString,
-    description: { type: String, required: true },
-    price: { type: Number, required: true },
-  },
-  { collection: collectionName } 
-);
+const Menu = mongoose.model('Menu', menuSchema);
 
-const model = _model(collectionName, MenuModel);
-
-module.exports = model;
+module.exports = Menu;
