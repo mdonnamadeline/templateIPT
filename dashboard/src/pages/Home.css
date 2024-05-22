@@ -139,6 +139,16 @@ body {
     height: 50px;
 
 }
+
+.horizontal {
+    display: block;
+    margin: auto;
+    width: 400px;
+    height: 100px;
+    margin-left: 20px;
+    margin-right: 60px;
+}
+
 .contact-items p {
     color: white;
     font-family: "Unica One", Arial, Helvetica, sans-serif;

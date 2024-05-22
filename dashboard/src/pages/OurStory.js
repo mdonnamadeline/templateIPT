@@ -14,9 +14,10 @@ import Facebook from "../Images/fb.png";
 import Twitter from "../Images/x.png";
 import Pinterest from "../Images/p.png";
 import Instagram from "../Images/ig.png";
+import Born from "../Images/born.png";
+
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-
 
 function OurStory() {
     const timelineItems = [
@@ -69,9 +70,18 @@ function OurStory() {
                 ))}
             </div>
 
+            <div className="ourstory-born">
+                <img
+                    src={Born}
+                    alt="Born"
+                />
+                <p>BORN</p>
+                <h6>JULY 2018</h6>
+            </div>
+
             <div>
                 <div className="contact">
-                    <img src={Horizontal} alt="Horizontal" />
+                    <img src={Horizontal} alt="Horizontal" className="horizontal"/>
 
                     <div className="contact-items">
                         <div className="contact-item">

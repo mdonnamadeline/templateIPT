@@ -49,6 +49,7 @@
 }
 }
 /*  */
+
 .aboutus-items-container {
     height: 100vh;
     width: 100%;
@@ -56,6 +57,15 @@
 .grid-item {
     color: white;
     font-family: "Unica One", sans-serif;
+}
+
+.horizontal {
+    display: block;
+    margin: auto;
+    width: 400px;
+    height: 100px;
+    margin-left: 20px;
+    margin-right: 60px;
 }
 
 .contact {

@@ -128,7 +128,7 @@ function Home() {
             </div>
 
             <div className="contact">
-                <img src={Horizontal} alt="Horizontal" />
+                <img src={Horizontal} alt="Horizontal" className="horizontal" />
 
                 <div className="contact-items">
                     <div className="contact-item">

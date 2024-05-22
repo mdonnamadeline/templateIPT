@@ -3,8 +3,11 @@ import NavBar from './NavBar'
 
 function ContactUs() {
   return (
-    <div>
+    <div className='contactus'>
       <NavBar />
+      <div className='contactus-items'>
+        
+      </div>
     </div>
   )
 }
