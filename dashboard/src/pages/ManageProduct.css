@@ -1,7 +1,8 @@
 .container {
     display: flex;
     flex-direction: column;
-    color: white;
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
 }
 
 .content {

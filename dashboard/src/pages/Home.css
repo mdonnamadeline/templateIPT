@@ -4,6 +4,7 @@
 body {
     background-color: #313539;
 }
+
 .home-items {
     display: flex;
     align-items: stretch;
@@ -153,7 +154,6 @@ body {
     color: white;
     font-family: "Unica One", Arial, Helvetica, sans-serif;
 }
-
 
  .circle-button {
     margin-top: 20px;

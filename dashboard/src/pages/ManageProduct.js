@@ -118,7 +118,7 @@ function ManageProduct() {
                 <TableContainer className="table-container">
                     <Table>
                         <TableHead>
-                            <TableRow>
+                            <TableRow >
                                 <TableCell align="center">Date</TableCell>
                                 <TableCell align="center">Title</TableCell>
                                 <TableCell align="center">Actions</TableCell>
