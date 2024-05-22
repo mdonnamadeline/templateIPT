@@ -24,11 +24,13 @@ function NavBar() {
                         marginRight: "40px",
                     }}
                 >
-                    <Link to="/home">HOME</Link>
+                    <Link to="/">HOME</Link>
                     <Link to="/aboutus">ABOUT US</Link>
                     <Link to="/menu">MENU</Link>
                     <Link to="/ourstory">OUR STORY</Link>
                     <Link to="/contactus">CONTACT US</Link>
+                    {/* <Link to="/admin">ADMIN</Link>
+                    <Link to="/manageuser">MANAGE USER</Link> */}
                 </div>
             </div>
         </div>
