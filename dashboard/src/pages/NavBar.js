@@ -29,8 +29,7 @@ function NavBar() {
                     <Link to="/menu">MENU</Link>
                     <Link to="/ourstory">OUR STORY</Link>
                     <Link to="/contactus">CONTACT US</Link>
-                    {/* <Link to="/admin">ADMIN</Link>
-                    <Link to="/manageuser">MANAGE USER</Link> */}
+                    {/* <Link to="/admin">ADMIN</Link> */}
                 </div>
             </div>
         </div>

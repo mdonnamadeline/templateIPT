@@ -24,29 +24,27 @@ function Login() {
         });
     };
 
-   const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-        const response = await axios.post(
-            "http://localhost:1337/adminLogin",
-            user
-        );
-        const result = response.data;
-        if (result.success) {
-            if (result.role === "admin") {
-                localStorage.setItem("user", user.email);
-                navigate("/admin"); 
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post(
+                "http://localhost:1337/signin",
+                user
+            );
+            const result = response.data;
+            if (result.success) {
+                localStorage.setItem("user", JSON.stringify(result.user));
+                navigate("/admin"); // Redirect to user dashboard
             } else {
-                alert("Only admins can log in.");
+                alert(result.message);
             }
-        } else {
-            alert(result.message);
+        } catch (error) {
+            console.error("Error logging in:", error);
+            alert("An error occurred. Please try again.");
         }
-    } catch (error) {
-        console.error("Error logging in:", error);
-        alert("An error occured. Please try again.");
-    }
-};
+    };
+    
+
     return (
         <div
             className="loginContainer"
@@ -75,12 +73,12 @@ function Login() {
                 <TextField
                     id="password"
                     required
-                    label="password"
+                    name="password"
+                    label="Password"
                     type={showPassword ? "text" : "password"}
                     variant="outlined"
                     value={user.password}
                     onChange={handleChange}
-                    clearable={false}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">

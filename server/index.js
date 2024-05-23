@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const fs = require("fs");
 const mongoose = require("mongoose");
 // const DataModel = require("./models/journal.model");
-const AdminModel = require("./models/Admin.model");
+const User = require("./models/user.model");
 const Menu = require("./models/Menu.model");
 const multer = require('multer');
 const path = require('path');
@@ -135,93 +135,79 @@ app.post("/signup", async (req, res) => {
 
 //MARK# NEW
  
-//ADMIN CRUD
-// add admin
-app.post("/Addadmin", async (req, res) => {
-    const incomingData = req.body;
-
+//MARK:ADMIN CRUD
+// Create user
+app.post('/adduser', async (req, res) => {
+    const { firstname, lastname, middlename, email, password } = req.body;
     try {
-        const adminObject = new AdminModel(incomingData);
-        await adminObject.save();
-        res.json({ success: true, message: "Admin added successfully!" });
+      const newUser = new User({ firstname, lastname, middlename, email, password });
+      await newUser.save();
+      res.status(201).json({ success: true, message: 'User added successfully' });
     } catch (error) {
-        console.error("Error adding admin:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+      res.status(400).json({ success: false, message: 'Failed to add user', error });
     }
-});
-
-//view or read
-app.get("/Viewadmins", async (req, res) => {
+  });
+  
+  // Read all users
+  app.get('/viewusers', async (req, res) => {
     try {
-        const gotAdminList = await AdminModel.find();
-        res.json(gotAdminList);
+      const users = await User.find({});
+      res.status(200).json(users);
     } catch (error) {
-        console.error("Error getting admins:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+      res.status(500).json({ success: false, message: 'Error fetching users', error });
     }
-});
-
-// update admin
-app.put("/Editadmin/:id", async (req, res) => {
-    const incomingData = req.body;
-
+  });
+  
+  // Update user
+  app.post('/updateuser', async (req, res) => {
+    const { _id, firstname, lastname, middlename, email, password } = req.body;
     try {
-        const adminObject = await AdminModel.findById(req.params.id);
-        if (!adminObject) {
-            res.json({ success: false, message: "Admin not found" });
-        } else {
-            Object.assign(adminObject, incomingData);
-            await adminObject.save();
-            res.json({ success: true, message: "Admin updated successfully!" });
-        }
+      const updatedUser = await User.findByIdAndUpdate(_id, { firstname, lastname, middlename, email, password }, { new: true });
+      if (!updatedUser) {
+        return res.status(404).json({ success: false, message: 'User not found' });
+      }
+      res.status(200).json({ success: true, message: 'User updated successfully', user: updatedUser });
     } catch (error) {
-        console.error("Error updating admin:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+      res.status(400).json({ success: false, message: 'Failed to update user', error });
     }
-});
-
-// delete admin
-app.delete("/Deleteadmin/:id", async (req, res) => {
+  });
+  
+  // Delete user
+  app.post('/deleteuser', async (req, res) => {
+    const { _id } = req.body;
     try {
-        const adminObject = await AdminModel.findById(req.params.id);
-        if (!adminObject) {
-            res.json({ success: false, message: "Admin not found" });
-        } else {
-            await AdminModel.deleteOne({ _id: req.params.id });
-            res.json({ success: true, message: "Admin deleted successfully!" });
-        }
+      const deletedUser = await User.findByIdAndDelete(_id);
+      if (!deletedUser) {
+        return res.status(404).json({ success: false, message: 'User not found' });
+      }
+      res.status(200).json({ success: true, message: 'User deleted successfully' });
     } catch (error) {
-        console.error("Error deleting admin:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+      res.status(400).json({ success: false, message: 'Failed to delete user', error });
     }
-});
-
-//signin
-app.post('/adminLogin', async (req, res) => {
-    const { username, password } = req.body;
+  });
+  //signin 
+  app.post('/signin', async (req, res) => {
+    const { email, password } = req.body;
 
     try {
-        const adminObject = await AdminModel.findOne({ username });
+        const user = await User.findOne({ email });
 
-        if (!adminObject) {
-            return res.status(400).json({ error: 'Invalid username or password' });
+        if (!user) {
+            return res.json({ success: false, message: 'User not found' });
         }
 
-        if (adminObject.password !== password) {
-            return res.status(400).json({ error: 'Invalid username or password' });
+        if (user.password !== password) {
+            return res.json({ success: false, message: 'Invalid password' });
         }
 
-        // Admin is authenticated
-        res.json({ success: true, message: 'Logged in successfully!', role: 'admin' });
+        res.json({ success: true, user });
     } catch (error) {
-        console.error('Error logging in:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        console.error('Error during sign-in:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
     }
 });
 
-
-//MENU CRUD 
-
+//MARK:MENU CRUD 
 //Upload Menu
 app.post('/upload-menu', upload.single('file'), async (req, res) => {
     try {

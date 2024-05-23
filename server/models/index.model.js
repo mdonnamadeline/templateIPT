@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const multer = require('multer');
 const sharp = require('sharp');
-const Admin = require("./Admin.model");
+const User = require("./user.model")
 const Menu = require("./Menu.model");
 
 app.use(cors());

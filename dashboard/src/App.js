@@ -7,7 +7,7 @@ import OurStory from "./pages/OurStory";
 import ContactUs from "./pages/ContactUs";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
-import ManageUser from "./pages/ManageUser";
+import ViewUser from "./pages/ViewUser";
 
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 {/* <Route path="/manageproduct" element={<ManageProduct />} /> */}
                 <Route path="/admin" element={<Admin />} />
-                <Route path="/manageuser" element={<ManageUser />} />
+                <Route path="/viewuser" element={<ViewUser />} />
                 <Route path="/" element={<Home />} />
                 <Route path="/Aboutus" element={<AboutUs />} />
                 <Route path="/Menu" element={<Menu />} />
