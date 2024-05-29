@@ -36,6 +36,7 @@ function Main() {
         setOpenModal(true);
     };
 
+
     const handleCloseModal = () => {
         setOpenModal(false);
         setFilmDetails({
@@ -56,9 +57,17 @@ function Main() {
     };
 
     const handlePosterChange = (e) => {
+        const file = e.target.files[0];
+        const maxSize = 17 * 1024 * 1024;
+
+        if (file.size > maxSize) {
+            alert("File size exceeds the limit of 17MB");
+            return;
+        }
+
         setFilmDetails((prevDetails) => ({
             ...prevDetails,
-            poster: e.target.files[0],
+            poster: file,
         }));
     };
 
@@ -73,27 +82,39 @@ function Main() {
         formData.append("logline", filmDetails.logline);
 
         try {
-            const response = await axios.post("http://localhost:1337/post-films", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            });
+            const response = await axios.post(
+                "http://localhost:1337/post-films",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
 
             console.log("Poster added successfully:", response.data);
             handleCloseModal();
             handleGetFilms();
         } catch (error) {
-            console.error("Error adding poster:", error.response?.data || error.message);
+            console.error(
+                "Error adding poster:",
+                error.response?.data || error.message
+            );
         }
     };
 
     const handleDeleteFilm = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:1337/delete-films/${id}`);
+            const response = await axios.delete(
+                `http://localhost:1337/delete-films/${id}`
+            );
             console.log("Poster deleted successfully:", response.data);
             handleGetFilms();
         } catch (error) {
-            console.error("Error deleting poster:", error.response?.data || error.message);
+            console.error(
+                "Error deleting poster:",
+                error.response?.data || error.message
+            );
         }
     };
 
@@ -106,15 +127,22 @@ function Main() {
         formData.append("logline", filmDetails.logline);
 
         try {
-            const response = await axios.put(`http://localhost:1337/put-films/${id}`, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            });
+            const response = await axios.put(
+                `http://localhost:1337/put-films/${id}`,
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
             console.log("Poster updated successfully:", response.data);
             handleGetFilms();
         } catch (error) {
-            console.error("Error updating poster:", error.response?.data || error.message);
+            console.error(
+                "Error updating poster:",
+                error.response?.data || error.message
+            );
         }
     };
 
@@ -123,17 +151,20 @@ function Main() {
             const response = await axios.get("http://localhost:1337/get-films");
             setFilms(response.data.data);
         } catch (error) {
-            console.error("Error getting films:", error.response?.data || error.message);
+            console.error(
+                "Error getting films:",
+                error.response?.data || error.message
+            );
         }
     };
 
     return (
         <div>
             <div className="main">
-                <h3>Film Manager</h3>
                 <Button variant="contained" onClick={handleOpenModal}>
                     Add Film
                 </Button>
+
                 <Dialog open={openModal} onClose={handleCloseModal}>
                     <DialogTitle>Add Film</DialogTitle>
                     <DialogContent>
@@ -186,7 +217,10 @@ function Main() {
                                 onChange={handleInputChange}
                             />
                             <DialogActions>
-                                <Button onClick={handleCloseModal} color="primary">
+                                <Button
+                                    onClick={handleCloseModal}
+                                    color="primary"
+                                >
                                     Cancel
                                 </Button>
                                 <Button type="submit" color="primary">
@@ -196,12 +230,20 @@ function Main() {
                         </form>
                     </DialogContent>
                 </Dialog>
-                {/* Display films */}
+
                 <Grid container spacing={2}>
                     {films.map((film) => (
                         <Grid item xs={12} sm={6} md={4} lg={3} key={film._id}>
                             <Card>
                                 <CardContent>
+                                    <img
+                                        src={`data:image/jpeg;base64,${film.image}`}
+                                        alt={film.title}
+                                        style={{
+                                            maxWidth: "100%",
+                                            marginTop: 10,
+                                        }}
+                                    />
                                     <Typography variant="h5" component="h2">
                                         {film.title}
                                     </Typography>
@@ -214,17 +256,22 @@ function Main() {
                                     <Typography variant="body2" component="p">
                                         {film.logline}
                                     </Typography>
-                                    <img
-                                        src={`data:image/jpeg;base64,${film.image}`}
-                                        alt={film.title}
-                                        style={{ maxWidth: "100%", marginTop: 10 }}
-                                    />
                                 </CardContent>
                                 <CardActions>
-                                    <Button size="small" onClick={() => handleDeleteFilm(film._id)}>
+                                    <Button
+                                        size="small"
+                                        onClick={() =>
+                                            handleDeleteFilm(film._id)
+                                        }
+                                    >
                                         Delete
                                     </Button>
-                                    <Button size="small" onClick={() => handleUpdateFilm(film._id)}>
+                                    <Button
+                                        size="small"
+                                        onClick={() =>
+                                            handleUpdateFilm(film._id)
+                                        }
+                                    >
                                         Update
                                     </Button>
                                 </CardActions>
