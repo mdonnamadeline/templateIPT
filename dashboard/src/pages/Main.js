@@ -104,7 +104,7 @@ function Main() {
         formData.append("logline", filmDetails.logline);
 
         try {
-            const response = await axios.put(`/update-poster/${id}`, formData, {
+            const response = await axios.put(`/put-films/${id}`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -118,7 +118,7 @@ function Main() {
 
     const handleGetFilms = async () => {
         try {
-            const response = await axios.get("/get-poster");
+            const response = await axios.get("/get-films");
             setFilms(response.data.data);
         } catch (error) {
             console.error("Error getting films:", error.response?.data || error.message);

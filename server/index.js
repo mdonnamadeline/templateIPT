@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 });
 
 // Upload Poster
-app.post('/upload-poster', upload.single('poster'), async (req, res) => {
+app.post('/post-films', upload.single('poster'), async (req, res) => {
   try {
       const { title, director, releaseYear, logline } = req.body;
       const image = req.file.buffer.toString('base64');
@@ -49,7 +49,7 @@ app.post('/upload-poster', upload.single('poster'), async (req, res) => {
 });
 
 // Display Posters
-app.get("/get-poster", async (req, res) => {
+app.get("/get-films", async (req, res) => {
   try {
       const data = await Poster.find({});
       res.send({ status: "ok", data: data });
@@ -59,7 +59,7 @@ app.get("/get-poster", async (req, res) => {
 });
 
 // Delete Poster
-app.delete("/delete-poster/:id", async (req, res) => {
+app.delete("/delete-films/:id", async (req, res) => {
   const { id } = req.params;
   try {
       const result = await Poster.findByIdAndDelete(id);
@@ -75,7 +75,7 @@ app.delete("/delete-poster/:id", async (req, res) => {
 });
 
 // Update Poster
-app.put('/update-poster/:id', upload.single('poster'), async (req, res) => {
+app.put('/put-films/:id', upload.single('poster'), async (req, res) => {
   const { id } = req.params;
   const { title, director, releaseYear, logline } = req.body;
 
