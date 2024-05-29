@@ -4,7 +4,6 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const mongoose = require("mongoose");
-// const DataModel = require("./models/journal.model");
 const User = require("./models/user.model");
 const Menu = require("./models/Menu.model");
 const multer = require('multer');
