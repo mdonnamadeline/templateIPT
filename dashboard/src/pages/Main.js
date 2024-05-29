@@ -8,6 +8,11 @@ import {
     DialogContent,
     DialogContentText,
     DialogTitle,
+    Card,
+    CardContent,
+    CardActions,
+    Typography,
+    Grid,
 } from "@mui/material";
 import "./Main.css";
 
@@ -20,7 +25,7 @@ function Main() {
         releaseYear: "",
         logline: "",
     });
-    const [films, setFilms] = useState([]); 
+    const [films, setFilms] = useState([]);
     const posterInputRef = useRef(null);
 
     useEffect(() => {
@@ -57,26 +62,23 @@ function Main() {
         }));
     };
 
-  
-
     const handleAddFilm = async (e) => {
         e.preventDefault();
-        
+
         const formData = new FormData();
         formData.append("poster", filmDetails.poster);
         formData.append("title", filmDetails.title);
         formData.append("director", filmDetails.director);
         formData.append("releaseYear", filmDetails.releaseYear);
         formData.append("logline", filmDetails.logline);
-    
+
         try {
-            
-            const response = await axios.post("/upload-poster", formData, {
+            const response = await axios.post("http://localhost:1337/post-films", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
             });
-            
+
             console.log("Poster added successfully:", response.data);
             handleCloseModal();
             handleGetFilms();
@@ -87,7 +89,7 @@ function Main() {
 
     const handleDeleteFilm = async (id) => {
         try {
-            const response = await axios.delete(`/delete-poster/${id}`);
+            const response = await axios.delete(`http://localhost:1337/delete-films/${id}`);
             console.log("Poster deleted successfully:", response.data);
             handleGetFilms();
         } catch (error) {
@@ -104,7 +106,7 @@ function Main() {
         formData.append("logline", filmDetails.logline);
 
         try {
-            const response = await axios.put(`/put-films/${id}`, formData, {
+            const response = await axios.put(`http://localhost:1337/put-films/${id}`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -118,7 +120,7 @@ function Main() {
 
     const handleGetFilms = async () => {
         try {
-            const response = await axios.get("/get-films");
+            const response = await axios.get("http://localhost:1337/get-films");
             setFilms(response.data.data);
         } catch (error) {
             console.error("Error getting films:", error.response?.data || error.message);
@@ -171,52 +173,68 @@ function Main() {
                                 name="releaseYear"
                                 value={filmDetails.releaseYear}
                                 onChange={handleInputChange}
-                                />
-                                <TextField
-                                    margin="dense"
-                                    label="Logline"
-                                    type="text"
-                                    fullWidth
-                                    multiline
-                                    rows={4}
-                                    name="logline"
-                                    value={filmDetails.logline}
-                                    onChange={handleInputChange}
-                                />
-                                <DialogActions>
-                                    <Button onClick={handleCloseModal} color="primary">
-                                        Cancel
-                                    </Button>
-                                    <Button onClick={handleAddFilm}type="submit" color="primary">
-                                        Add
-                                    </Button>
-                                </DialogActions>
-                            </form>
-                        </DialogContent>
-                    </Dialog>
-                    {/* Display films */}
-                    {films.map((film) => (
-                        <div key={film._id}>
-                            <h4>{film.title}</h4>
-                            <p>{film.director}</p>
-                            <p>{film.releaseYear}</p>
-                            <p>{film.logline}</p>
-                            <img
-                                src={`data:image/jpeg;base64,${film.image}`}
-                                alt={film.title}
                             />
-                            <Button onClick={() => handleDeleteFilm(film._id)}>
-                                Delete
-                            </Button>
-                            <Button onClick={() => handleUpdateFilm(film._id)}>
-                                Update
-                            </Button>
-                        </div>
+                            <TextField
+                                margin="dense"
+                                label="Logline"
+                                type="text"
+                                fullWidth
+                                multiline
+                                rows={4}
+                                name="logline"
+                                value={filmDetails.logline}
+                                onChange={handleInputChange}
+                            />
+                            <DialogActions>
+                                <Button onClick={handleCloseModal} color="primary">
+                                    Cancel
+                                </Button>
+                                <Button type="submit" color="primary">
+                                    Add
+                                </Button>
+                            </DialogActions>
+                        </form>
+                    </DialogContent>
+                </Dialog>
+                {/* Display films */}
+                <Grid container spacing={2}>
+                    {films.map((film) => (
+                        <Grid item xs={12} sm={6} md={4} lg={3} key={film._id}>
+                            <Card>
+                                <CardContent>
+                                    <Typography variant="h5" component="h2">
+                                        {film.title}
+                                    </Typography>
+                                    <Typography color="textSecondary">
+                                        Director: {film.director}
+                                    </Typography>
+                                    <Typography color="textSecondary">
+                                        Release Year: {film.releaseYear}
+                                    </Typography>
+                                    <Typography variant="body2" component="p">
+                                        {film.logline}
+                                    </Typography>
+                                    <img
+                                        src={`data:image/jpeg;base64,${film.image}`}
+                                        alt={film.title}
+                                        style={{ maxWidth: "100%", marginTop: 10 }}
+                                    />
+                                </CardContent>
+                                <CardActions>
+                                    <Button size="small" onClick={() => handleDeleteFilm(film._id)}>
+                                        Delete
+                                    </Button>
+                                    <Button size="small" onClick={() => handleUpdateFilm(film._id)}>
+                                        Update
+                                    </Button>
+                                </CardActions>
+                            </Card>
+                        </Grid>
                     ))}
-                </div>
+                </Grid>
             </div>
-        );
-    }
-    
-    export default Main;
-    
+        </div>
+    );
+}
+
+export default Main;

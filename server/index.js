@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const multer = require("multer");
+const Poster = require('./models/poster.model');
 
 // Middleware setup
 app.use(cors());
