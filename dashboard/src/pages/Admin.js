@@ -27,6 +27,8 @@ function Admin() {
     const [deleteId, setDeleteId] = useState(null);
     const [uploadError, setUploadError] = useState(""); // For upload errors
     const [uploadSuccess, setUploadSuccess] = useState(""); // For upload success
+    const [editFile, setEditFile] = useState(null);
+    const editFileInputRef = useRef(null);
 
     useEffect(() => {
         getDish();
@@ -34,6 +36,10 @@ function Admin() {
 
     function handleFileChange(e) {
         setFile(e.target.files[0]);
+    }
+
+    function handleEditFileChange(e) {
+        setEditFile(e.target.files[0]);
     }
 
     async function uploadDish() {
@@ -135,32 +141,37 @@ function Admin() {
     };
 
     const updateDish = async () => {
+        setUploadError("");
+        const formData = new FormData();
+        formData.append("name", editName);
+        formData.append("price", editPrice);
+        formData.append("description", editDescription);
+        if (editFile) {
+            formData.append("file", editFile);
+        }
+    
         try {
             const response = await fetch(
                 `http://localhost:1337/update-menu/${editId}`,
                 {
                     method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        name: editName,
-                        price: editPrice,
-                        description: editDescription,
-                    }),
+                    body: formData,
                 }
             );
             const data = await response.json();
-            if (data.status === "ok") {
+            if (response.ok) {
                 getDish();
                 closeEditDialog();
             } else {
                 console.error("Error updating dish:", data.message);
+                setUploadError(data.message || "Error updating dish");
             }
         } catch (error) {
             console.error("Error updating dish:", error);
+            setUploadError(error.message || "Error updating dish");
         }
     };
+    
 
     return (
         <div>
@@ -258,10 +269,11 @@ function Admin() {
                     })}
                 </div>
                 <Dialog open={editDialogOpen} onClose={closeEditDialog}>
-                    <DialogTitle>Edit Image</DialogTitle>
+                    <DialogTitle>Edit Dish</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Update the name, price, and description of the Dish.
+                            Update the name, price, description, and image of
+                            the dish.
                         </DialogContentText>
                         <TextField
                             autoFocus
@@ -290,6 +302,20 @@ function Admin() {
                             value={editDescription}
                             onChange={(e) => setEditDescription(e.target.value)}
                         />
+                        <input
+                            ref={editFileInputRef}
+                            accept="image/jpeg,image/png"
+                            type="file"
+                            onChange={handleEditFileChange}
+                        />
+                        {editFile && (
+                            <img
+                                width={150}
+                                height={150}
+                                src={URL.createObjectURL(editFile)}
+                                alt="Edit Uploaded"
+                            />
+                        )}
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={closeEditDialog} color="primary">
@@ -304,7 +330,7 @@ function Admin() {
                     <DialogTitle>Delete Confirmation</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Are you sure you want to delete this Dish?
+                            Are you sure you want to delete this dish?
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>

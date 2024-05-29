@@ -4,8 +4,6 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import Insign from "../Images/site-logo-insign.png";
-import Min from "../Images/collection-min.jpg";
 
 function Login() {
     const [user, setUser] = useState({
@@ -47,15 +45,8 @@ function Login() {
 
     return (
         <div
-            className="loginContainer"
-            style={{ backgroundImage: `url(${Min})` }}
+           
         >
-            <img
-                src={Insign}
-                alt="Insign"
-                style={{ width: "300px", height: "300px", marginRight: 50 }}
-            />
-
             <form className="loginForm" onSubmit={handleLogin}>
                 <h2>BLACKSCOOP CAFE</h2>
                 <p>Welcome Admin!</p>

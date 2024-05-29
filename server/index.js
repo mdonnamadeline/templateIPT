@@ -251,26 +251,26 @@ app.delete("/delete-menu/:id", async (req, res) => {
   });
 
   // Update endpoint
-app.put("/update-menu/:id", async (req, res) => {
+  app.put('/update-menu/:id', upload.single('file'), async (req, res) => {
     const { id } = req.params;
     const { name, price, description } = req.body;
-  
-    try {
-      const menu = await Menu.findById(id);
-      if (menu) {
-        menu.name = name;
-        menu.price = price;
-        menu.description = description;
-  
-        const updatedMenu = await menu.save();
-        res.send({ status: "ok", message: "Menu updated successfully", data: updatedMenu });
-      } else {
-        res.status(404).send({ status: "error", message: "Menu not found" });
-      }
-    } catch (error) {
-      console.error("Error updating menu:", error);
-      res.status(500).send({ status: "error", message: error.message });
+    
+    let updateFields = { name, price, description };
+
+    if (req.file) {
+        const image = req.file.buffer.toString('base64');
+        updateFields.image = image;
     }
-  });
+
+    try {
+        const updatedMenu = await Menu.findByIdAndUpdate(id, updateFields, { new: true, runValidators: true });
+        if (!updatedMenu) {
+            return res.status(404).send({ status: 'error', message: 'Dish not found' });
+        }
+        res.send({ status: 'ok', data: updatedMenu });
+    } catch (error) {
+        res.status(400).send({ status: 'error', message: error.message });
+    }
+});
 
 
